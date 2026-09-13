@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Kalkulator Rahasia</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+
+    <!-- BAGIAN 1: TAMPILAN KALKULATOR -->
+    <div id="calculator-section" class="calculator">
+        <div id="result" class="result">0</div>
+        <div class="buttons">
+            <button class="btn function" onclick="clearScreen()">C</button>
+            <button class="btn function" onclick="deleteChar()">DEL</button>
+            <button class="btn operator" onclick="appendChar('/')">/</button>
+            <button class="btn operator" onclick="appendChar('*')">×</button>
+
+            <button class="btn" onclick="appendChar('7')">7</button>
+            <button class="btn" onclick="appendChar('8')">8</button>
+            <button class="btn" onclick="appendChar('9')">9</button>
+            <button class="btn operator" onclick="appendChar('-')">-</button>
+
+            <button class="btn" onclick="appendChar('4')">4</button>
+            <button class="btn" onclick="appendChar('5')">5</button>
+            <button class="btn" onclick="appendChar('6')">6</button>
+            <button class="btn operator" onclick="appendChar('+')">+</button>
+
+            <button class="btn" onclick="appendChar('1')">1</button>
+            <button class="btn" onclick="appendChar('2')">2</button>
+            <button class="btn" onclick="appendChar('3')">3</button>
+            <button class="btn equals" onclick="calculate()">=</button>
+
+            <button class="btn zero" onclick="appendChar('0')">0</button>
+            <button class="btn" onclick="appendChar('.')">.</button>
+        </div>
+    </div>
+
+    <!-- BAGIAN 2: TAMPILAN BRANKAS RAHASIA (Disembunyikan secara default) -->
+    <div id="vault-section" class="vault-container" style="display: none;">
+        <h2>🔐 Brankas Rahasia</h2>
+        <p>Simpan gambar atau file kamu secara aman di sini.</p>
+        
+        <!-- Input untuk memilih file gambar/video -->
+        <input type="file" id="fileInput" accept="image/*,video/*" onchange="saveFileToLocalStorage(event)">
+        <button class="btn-back" onclick="lockVault()">Kunci Kembali (Keluar)</button>
+
+        <h3>Daftar File Tersimpan:</h3>
+        <div id="file-list" class="file-list"></div>
+    </div>
+
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
