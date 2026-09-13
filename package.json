@@ -1,0 +1,13 @@
+{
+  "name": "vault-kalkulator",
+  "displayName": "Kalkulator Rahasia",
+  "version": "1.0.0",
+  "description": "Kalkulator dengan brankas file lokal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kamu",
+  "license": "ISC"
+}
