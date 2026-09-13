@@ -1,19 +1,43 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.vaultkalkulator" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Kalkulator Rahasia</name>
-    <description>Aplikasi Kalkulator dengan Brankas Penyimpanan Lokal</description>
-    <author email="dev@example.com" href="http://example.com">Developer</author>
-    <content src="index.html" />
-    
-    <!-- Izin untuk Akses Penyimpanan Perangkat Android -->
-    <platform name="android">
-        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest">
-            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        </edit-config>
-    </platform>
+name: Build Android APK
 
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <preference name="Orientation" value="portrait" />
-</widget>
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install Cordova
+      run: npm install -g cordova
+
+    - name: Prepare Project Structure
+      run: |
+        cordova create temp_app com.example.vaultkalkulator "Kalkulator Rahasia"
+        rm -rf temp_app/www
+        cp -r www temp_app/
+        cp config.xml temp_app/
+        cp package.json temp_app/
+        cd temp_app
+        cordova platform add android
+
+    - name: Build APK
+      run: |
+        cd temp_app
+        cordova build android --release
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release-apk
+        path: temp_app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
