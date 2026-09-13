@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.example.vaultkalkulator" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Kalkulator Rahasia</name>
+    <description>Aplikasi Kalkulator dengan Brankas Penyimpanan Lokal</description>
+    <author email="dev@example.com" href="http://example.com">Developer</author>
+    <content src="index.html" />
+    
+    <!-- Izin untuk Akses Penyimpanan Perangkat Android -->
+    <platform name="android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest">
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </edit-config>
+    </platform>
+
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <preference name="Orientation" value="portrait" />
+</widget>
